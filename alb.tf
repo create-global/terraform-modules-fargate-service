@@ -17,7 +17,7 @@ resource "aws_alb_target_group" "app" {
 
 # Redirect all traffic from the ALB to the target group
 resource "aws_alb_listener" "insecure" {
-  load_balancer_arn = "${aws_alb.main.id}"
+  load_balancer_arn = aws_alb.main.id
   port              = "80"
   protocol          = "HTTP"
 
@@ -33,7 +33,7 @@ resource "aws_alb_listener" "insecure" {
 }
 
 resource "aws_alb_listener" "secure" {
-  load_balancer_arn = "${aws_alb.main.id}"
+  load_balancer_arn = aws_alb.main.id
   port              = "443"
   protocol          = "HTTPS"
 
@@ -41,7 +41,7 @@ resource "aws_alb_listener" "secure" {
   certificate_arn = "${aws_acm_certificate.cert.arn}"
 
   default_action {
-    target_group_arn = "${aws_alb_target_group.app.id}"
+    target_group_arn = aws_alb_target_group.app.id
     type             = "forward"
   }
 }
