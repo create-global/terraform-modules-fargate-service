@@ -28,6 +28,8 @@ resource "aws_ecs_service" "main" {
     ignore_changes = ["desired_count"]
   }
 
+  depends_on = ["aws_alb_target_group.app"]
+
   tags = var.tags
 }
 

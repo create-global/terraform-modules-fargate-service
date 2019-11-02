@@ -11,6 +11,8 @@ resource "aws_alb_target_group" "app" {
   protocol    = "HTTP"
   vpc_id      = var.vpc_id
   target_type = "ip"
+
+  depends_on = ["aws_alb.main"]
 }
 
 # Redirect all traffic from the ALB to the target group
