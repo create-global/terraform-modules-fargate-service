@@ -53,7 +53,7 @@ resource "aws_ecs_task_definition" "main" {
     "memory": ${var.memory},
     "name": "${local.fqsn}",
     "networkMode": "awsvpc",
-    "environment": ${jsonencode(var.env)},
+    "environment": ${jsonencode(local.env)},
     "logConfiguration": {
       "logDriver": "awslogs",
       "options" : {
@@ -61,7 +61,7 @@ resource "aws_ecs_task_definition" "main" {
         "awslogs-region": "eu-west-1",
         "awslogs-stream-prefix": "${local.fqsn}"
       }
-    }
+    },
     "portMappings": [
       {
         "containerPort": ${var.app_port},
