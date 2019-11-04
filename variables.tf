@@ -19,7 +19,7 @@ variable "memory" {
 }
 
 variable "env" {
-  type = map[string]string 
+  type = map(string)
 }
 
 variable "log_retention" {
