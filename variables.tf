@@ -25,3 +25,13 @@ variable "env" {
 variable "log_retention" {
   default = 7
 }
+
+variable "ingress_security_groups" {
+  type    = list
+  default = []
+}
+
+variable "task_security_groups" {
+  type    = list
+  default = []
+}
