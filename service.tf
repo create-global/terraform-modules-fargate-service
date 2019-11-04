@@ -53,7 +53,7 @@ resource "aws_ecs_task_definition" "main" {
     "memory": ${var.memory},
     "name": "${local.fqsn}",
     "networkMode": "awsvpc",
-    "environment": ${json_encode(var.env)}
+    "environment": ${jsonencode(var.env)}
     "logConfiguration": {
       "logDriver": "awslogs",
       "options" : {
