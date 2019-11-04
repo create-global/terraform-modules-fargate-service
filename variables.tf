@@ -11,11 +11,17 @@ variable "public_subnets" {}
 variable "private_subnets" {}
 variable "tags" {}
 
-
-
 variable "cpu" {
   default = 512
 }
 variable "memory" {
   default = 1024
+}
+
+variable "env" {
+  type = map[string]string 
+}
+
+variable "log_retention" {
+  default = 7
 }

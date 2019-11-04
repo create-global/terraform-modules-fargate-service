@@ -53,6 +53,15 @@ resource "aws_ecs_task_definition" "main" {
     "memory": ${var.memory},
     "name": "${local.fqsn}",
     "networkMode": "awsvpc",
+    "environment": ${json_encode(var.env)}
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options" : {
+        "awslogs-group": "${var.fqsn}",
+        "awslogs-region": "eu-west-1",
+        "awslogs-stream-prefix": "${var.fqsn}"
+      }
+    }
     "portMappings": [
       {
         "containerPort": ${var.app_port},
@@ -62,6 +71,14 @@ resource "aws_ecs_task_definition" "main" {
   }
 ]
 HERE
+
+  tags = var.tags
+}
+
+
+resource "aws_cloudwatch_log_group" "log-group" {
+  name              = var.fqsn
+  retention_in_days = var.log_retention
 
   tags = var.tags
 }
