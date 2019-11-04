@@ -57,9 +57,9 @@ resource "aws_ecs_task_definition" "main" {
     "logConfiguration": {
       "logDriver": "awslogs",
       "options" : {
-        "awslogs-group": "${var.fqsn}",
+        "awslogs-group": "${local.fqsn}",
         "awslogs-region": "eu-west-1",
-        "awslogs-stream-prefix": "${var.fqsn}"
+        "awslogs-stream-prefix": "${local.fqsn}"
       }
     }
     "portMappings": [
@@ -77,7 +77,7 @@ HERE
 
 
 resource "aws_cloudwatch_log_group" "log-group" {
-  name              = var.fqsn
+  name              = local.fqsn
   retention_in_days = var.log_retention
 
   tags = var.tags
