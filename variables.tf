@@ -35,3 +35,8 @@ variable "task_security_groups" {
   type    = list
   default = []
 }
+
+variable "health_check_path" {
+  type    = string
+  default = "/"
+}
