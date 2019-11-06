@@ -67,7 +67,7 @@ EOF
 }
 
 resource "aws_iam_role_policy" "task_role" {
-  name = "${local.fqsn}-task-role"
-  role = aws_iam_role.execution_role.id
+  name   = "${local.fqsn}-task-role"
+  role   = aws_iam_role.task_role.id
   policy = var.task_policy
 }
