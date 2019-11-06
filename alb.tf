@@ -21,6 +21,6 @@ resource "aws_lb_listener_rule" "primary" {
 
   condition {
     field  = "host-header"
-    values = [local.fqdn]
+    values = [replace(local.fqdn, "/[.]$/", "")]
   }
 }
