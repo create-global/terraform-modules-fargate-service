@@ -42,3 +42,13 @@ variable "health_check_path" {
   type    = string
   default = "/"
 }
+
+
+variable "task_policy" {
+  default = <<TP
+{
+  "Version": "2012-10-17",
+  "Statement": []
+}
+TP
+}
