@@ -48,7 +48,13 @@ variable "task_policy" {
   default = <<TP
 {
   "Version": "2012-10-17",
-  "Statement": []
+  "Statement": [
+    {
+        "Effect": "Allow",
+        "Action": "sts:GetCallerIdentity",
+        "Resource": "*"
+    }
+  ]
 }
 TP
 }
