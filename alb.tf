@@ -1,9 +1,3 @@
-resource "aws_alb" "main" {
-  name            = local.fqsn
-  subnets         = var.public_subnets
-  security_groups = var.ingress_security_groups
-  tags            = var.tags
-}
 
 resource "aws_alb_target_group" "app" {
   name        = local.fqsn
@@ -19,35 +13,16 @@ resource "aws_alb_target_group" "app" {
   depends_on = ["aws_alb.main"]
 }
 
-# Redirect all traffic from the ALB to the target group
-resource "aws_alb_listener" "insecure" {
-  load_balancer_arn = aws_alb.main.id
-  port              = "80"
-  protocol          = "HTTP"
+resource "aws_lb_listener_rule" "primary" {
+  listener_arn = "${data.aws_lb_listener.secure.arn}"
 
-  default_action {
-    type = "redirect"
-
-    redirect {
-      port        = "443"
-      protocol    = "HTTPS"
-      status_code = "HTTP_301"
-    }
-  }
-}
-
-resource "aws_alb_listener" "secure" {
-  load_balancer_arn = aws_alb.main.id
-  port              = "443"
-  protocol          = "HTTPS"
-
-  ssl_policy      = "ELBSecurityPolicy-2016-08"
-  certificate_arn = "${aws_acm_certificate.cert.arn}"
-
-  default_action {
-    target_group_arn = aws_alb_target_group.app.id
+  action {
     type             = "forward"
+    target_group_arn = "${aws_alb_target_group.app.arn}"
+  }
+
+  condition {
+    field  = "host-header"
+    values = [local.fqdn]
   }
 }
-
-
