@@ -9,8 +9,6 @@ resource "aws_alb_target_group" "app" {
   health_check {
     path = var.health_check_path
   }
-
-  depends_on = ["aws_alb.main"]
 }
 
 resource "aws_lb_listener_rule" "primary" {
