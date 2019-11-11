@@ -13,6 +13,10 @@ variable "tags" {}
 variable "ingress_lb_arn" {}
 variable "secure_listener_arn" {}
 
+variable "email_to_alert" {
+  default = ""
+}
+
 variable "cpu" {
   default = 512
 }
