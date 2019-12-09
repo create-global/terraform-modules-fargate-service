@@ -10,8 +10,8 @@ resource "aws_ecs_service" "main" {
   cluster         = aws_ecs_cluster.main.id
   task_definition = aws_ecs_task_definition.main.arn
   desired_count   = 1
-
-  launch_type = "FARGATE"
+  propagate_tags  = "SERVICE"
+  launch_type     = "FARGATE"
 
   network_configuration {
     security_groups = var.task_security_groups
