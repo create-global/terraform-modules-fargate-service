@@ -6,12 +6,13 @@ resource "aws_ecs_cluster" "main" {
 
 
 resource "aws_ecs_service" "main" {
-  name            = local.fqsn
-  cluster         = aws_ecs_cluster.main.id
-  task_definition = aws_ecs_task_definition.main.arn
-  desired_count   = 1
-  propagate_tags  = "SERVICE"
-  launch_type     = "FARGATE"
+  name             = local.fqsn
+  cluster          = aws_ecs_cluster.main.id
+  task_definition  = aws_ecs_task_definition.main.arn
+  desired_count    = 1
+  propagate_tags   = "SERVICE"
+  launch_type      = "FARGATE"
+  platform_version = 1.4.0
 
   network_configuration {
     security_groups = var.task_security_groups
