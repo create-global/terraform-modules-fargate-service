@@ -12,7 +12,6 @@ resource "aws_ecs_service" "main" {
   desired_count    = 1
   propagate_tags   = "SERVICE"
   launch_type      = "FARGATE"
-  platform_version = "1.4.0"
 
   network_configuration {
     security_groups = var.task_security_groups
